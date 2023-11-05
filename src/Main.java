@@ -10,6 +10,7 @@ import Model.Rules;
 import Model.State;
 
 public class Main {
+    // Hey
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Set<State> gameStates = new LinkedHashSet<>();
