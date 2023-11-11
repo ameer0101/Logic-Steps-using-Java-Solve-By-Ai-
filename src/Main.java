@@ -5,6 +5,7 @@ import java.util.*;
 
 import Algorithem.BFS;
 import Algorithem.DFS;
+import Algorithem.UCS;
 import Model.Move;
 import Model.Rules;
 import Model.State;
@@ -13,12 +14,13 @@ public class Main {
     // Hey
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Set<State> gameStates = new LinkedHashSet<>();
+        List<State> gameStates = new ArrayList<>();
+        List<State> goalState = new ArrayList<>();
         List<State> Points = new ArrayList<>() ;
 
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("Ameer2/Ameer/Board.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("Board2.txt"));
             int row = Integer.parseInt(reader.readLine());
             int col = Integer.parseInt(reader.readLine());
 
@@ -91,7 +93,20 @@ public class Main {
                         BFS bfs = new BFS(new ArrayList<>(gameStates), new ArrayList<>());
                         List<State> bfsStates = bfs.search();
                         gameStates.addAll(bfsStates);
+                        System.out.println(gameStates.size());
                         break;
+                    case "ucs":
+
+                            UCS ucs = new UCS(gameStates, new ArrayList<>());
+                            List<State> ucsStates = ucs.search();
+                            gameStates.addAll(ucsStates);
+
+                            System.out.println(gameStates.size());
+                            System.out.println(goalState.size());
+                        break;
+
+
+
                     default:
                         System.out.println("Invalid direction. Try again.");
                 }

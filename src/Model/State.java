@@ -2,13 +2,14 @@ package Model;
 
 import java.util.*;
 
-public class State {
+public class State implements Comparable<State> {
     public static int row;
     public static int col;
     public static int[][] board;
     public int startRow;
     public int startCol;
     private State parentState;
+    int pathcost;
 
     public State(int row, int col, int startRow, int startCol, int board[][]) {
         this.row = row;
@@ -81,6 +82,15 @@ public class State {
                 ", startCol=" + startCol +
                 '}';
     }
+
+////////////////////////////////////////
+    public int getPathCost() {return pathcost;}
+
+    @Override
+    public int compareTo(State other) {
+        return Integer.compare(this.getPathCost(), other.getPathCost());
+    }
+
 
 
 
