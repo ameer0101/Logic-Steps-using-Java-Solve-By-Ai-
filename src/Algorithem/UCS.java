@@ -8,54 +8,52 @@ import java.util.*;
 public class UCS {
     private List<State> startStates;
     private List<State> states;
+    private State state;
 
-    public UCS(List<State> startStates, List<State> states) {
+    public UCS(State state, List<State> startStates, List<State> states) {
+        this.state = state;
         this.startStates = startStates;
         this.states = states;
     }
 
     public List<State> search() {
-        PriorityQueue<State> queue = new PriorityQueue<>(Comparator.comparingInt(State::getPathCost));
-        Map<State, Integer> pathCosts = new HashMap<>();
+        PriorityQueue<State> queue = new PriorityQueue<>();
+        Map<State, Integer> visited = new HashMap<>(); // Change this line
 
         for (State startState : startStates) {
             queue.add(startState);
-            pathCosts.put(startState, 0);
+            visited.put(startState, 0); // Add this line
         }
 
         while (!queue.isEmpty()) {
             State currentState = queue.poll();
+
             states.add(currentState);
 
-            // Print the current state
             System.out.println("Current state: " + currentState);
-
-
+            currentState.printBoard();
+            System.out.println("Cost for current state: " + visited.get(currentState));
             int currentRow = currentState.getStartRow();
             int currentCol = currentState.getStartCol();
 
             List<State> neighbors = getNeighbors(currentRow, currentCol);
 
             for (State neighbor : neighbors) {
-                if (Rules.isValidMove(neighbor.getStartRow(), neighbor.getStartCol(), State.row, State.col) && Rules.isAvailable(State.board[neighbor.getStartRow()][neighbor.getStartCol()])) {
-                    int newPathCost = pathCosts.get(currentState) + 1;
-                    if (!pathCosts.containsKey(neighbor) || newPathCost < pathCosts.get(neighbor)) {
-                        pathCosts.put(neighbor, newPathCost);
-                        neighbor.setParentState(currentState);
-                        queue.add(neighbor);
-                        currentState.printBoard();
-                        State.board[neighbor.getStartRow()][neighbor.getStartCol()] -= 1;
-                    }
+                if (Rules.isValidMove(neighbor.getStartRow(), neighbor.getStartCol(), state.row, state.col) && Rules.isAvailable(state.board[neighbor.getStartRow()][neighbor.getStartCol()]) ) {
+                    neighbor.setParentState(currentState);
+                    queue.add(neighbor);
+                    visited.put(neighbor, visited.get(currentState) + 1); // Change this line
+                    state.board[neighbor.getStartRow()][neighbor.getStartCol()] -= 1;
                 }
             }
         }
         return states;
     }
 
+
     private List<State> getNeighbors(int row, int col) {
         List<State> neighbors = new ArrayList<>();
 
-        // Check all four directions (up, down, left, right)
         int[] rowOffsets = {-1, 0, 0, 1};
         int[] colOffsets = {0, -1, 1, 0};
 
@@ -63,9 +61,7 @@ public class UCS {
             int newRow = row + rowOffsets[i];
             int newCol = col + colOffsets[i];
 
-            // Check if the move to the neighboring state is valid and if the neighboring state is available
-            if (Rules.isValidMove(newRow, newCol, State.row, State.col) && Rules.isAvailable(State.board[newRow][newCol])) {
-                // Create a new State object for the neighboring state
+            if (Rules.isValidMove(newRow, newCol, state.row, state.col) && Rules.isAvailable(state.board[newRow][newCol])) {
                 State neighbor = new State(newRow, newCol);
                 neighbor.setParentState(neighbor);
                 neighbors.add(neighbor);

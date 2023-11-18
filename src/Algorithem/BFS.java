@@ -8,8 +8,10 @@ import java.util.*;
 public class BFS {
     private List<State> startStates;
     private List<State> states;
+    private State state;
 
-    public BFS(List<State> startStates, List<State> states) {
+    public BFS(State state, List<State> startStates, List<State> states) {  // Modify this line
+        this.state = state;  // Add this line
         this.startStates = startStates;
         this.states = states;
     }
@@ -25,12 +27,11 @@ public class BFS {
 
         while (!queue.isEmpty()) {
             State currentState = queue.poll();
+
             states.add(currentState);
 
-            // Print the current state
-            System.out.println("Current state: " + currentState);
 
-            // Print the board
+            System.out.println("Current state: " + currentState);
             currentState.printBoard();
 
             int currentRow = currentState.getStartRow();
@@ -39,11 +40,12 @@ public class BFS {
             List<State> neighbors = getNeighbors(currentRow, currentCol);
 
             for (State neighbor : neighbors) {
-                if (Rules.isValidMove(neighbor.getStartRow(), neighbor.getStartCol(), State.row, State.col) && Rules.isAvailable(State.board[neighbor.getStartRow()][neighbor.getStartCol()]) ) {
+                if (Rules.isValidMove(neighbor.getStartRow(), neighbor.getStartCol(), state.row, state.col) && Rules.isAvailable(state.board[neighbor.getStartRow()][neighbor.getStartCol()]) ) {
                     neighbor.setParentState(currentState);
                     queue.add(neighbor);
                     visited.add(neighbor);
-                    State.board[neighbor.getStartRow()][neighbor.getStartCol()] -= 1;
+                    state.board[neighbor.getStartRow()][neighbor.getStartCol()] -= 1;
+
                 }
             }
         }
@@ -53,7 +55,6 @@ public class BFS {
     private List<State> getNeighbors(int row, int col) {
         List<State> neighbors = new ArrayList<>();
 
-        // Check all four directions (up, down, left, right)
         int[] rowOffsets = {-1, 0, 0, 1};
         int[] colOffsets = {0, -1, 1, 0};
 
@@ -61,9 +62,8 @@ public class BFS {
             int newRow = row + rowOffsets[i];
             int newCol = col + colOffsets[i];
 
-            // Check if the move to the neighboring state is valid and if the neighboring state is available
-            if (Rules.isValidMove(newRow, newCol, State.row, State.col) && Rules.isAvailable(State.board[newRow][newCol])) {
-                // Create a new State object for the neighboring state
+
+            if (Rules.isValidMove(newRow, newCol, state.row, state.col) && Rules.isAvailable(state.board[newRow][newCol])) {
                 State neighbor = new State(newRow, newCol);
                 neighbor.setParentState(neighbor);
                 neighbors.add(neighbor);

@@ -16,7 +16,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         List<State> gameStates = new ArrayList<>();
         List<State> goalState = new ArrayList<>();
-        List<State> Points = new ArrayList<>() ;
 
 
         try {
@@ -33,9 +32,9 @@ public class Main {
                 String[] startPoint = reader.readLine().split(" ");
                 int startRow = Integer.parseInt(startPoint[0]);
                 int startCol = Integer.parseInt(startPoint[1]);
-                State state = new State(row, col, startRow, startCol, board);
+                int cost = Integer.parseInt(startPoint[2]);
+                State state = new State(row, col, startRow, startCol, board,cost);
                 gameStates.add(state);
-                Points.add(state);
             }
 
             while((line = reader.readLine()) != null) {
@@ -55,7 +54,6 @@ public class Main {
 
                 for (State currentState : gameStates) {
                     System.out.println("Player location: (" + currentState.startRow + ", " + currentState.startCol + ")");
-
                     if (Rules.isDead(currentState)) {
 
                         System.out.printf("You Lose !");
@@ -84,26 +82,23 @@ public class Main {
                         System.out.println("Number of states in the queue: " + gameStates.size());
                         break;
                     case "dfs":
-                        DFS dfs = new DFS(new ArrayList<>(gameStates), new ArrayList<>());
+                        DFS dfs = new DFS(gameStates.get(0),new ArrayList<>(gameStates), new ArrayList<>());
                         List<State> dfsStates = dfs.search();
                         gameStates.addAll(dfsStates);
-                        //System.out.println();
+
                         break;
                     case "bfs":
-                        BFS bfs = new BFS(new ArrayList<>(gameStates), new ArrayList<>());
+                        BFS bfs = new BFS(gameStates.get(0), new ArrayList<>(gameStates), new ArrayList<>());
                         List<State> bfsStates = bfs.search();
                         gameStates.addAll(bfsStates);
-                        System.out.println(gameStates.size());
                         break;
                     case "ucs":
+                        UCS ucs = new UCS(gameStates.get(0),new ArrayList<>(gameStates), new ArrayList<>());
+                        List<State> ucsStates = ucs.search();
+                        gameStates.addAll(ucsStates);
 
-                            UCS ucs = new UCS(gameStates, new ArrayList<>());
-                            List<State> ucsStates = ucs.search();
-                            gameStates.addAll(ucsStates);
-
-                            System.out.println(gameStates.size());
-                            System.out.println(goalState.size());
                         break;
+
 
 
 

@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bd1c83c-c651-448c-bdea-ca124878c384" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/Board2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Algorithem/UCS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Board.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Board2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithem/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithem/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithem/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithem/DFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithem/UCS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithem/UCS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/State.java" afterDir="false" />
     </list>
@@ -73,7 +77,11 @@
       <workItem from="1699198115407" duration="166000" />
       <workItem from="1699454597589" duration="911000" />
       <workItem from="1699616734593" duration="6646000" />
-      <workItem from="1699700858900" duration="491000" />
+      <workItem from="1699700858900" duration="5133000" />
+      <workItem from="1700240546631" duration="998000" />
+      <workItem from="1700249993544" duration="7056000" />
+      <workItem from="1700258627583" duration="2917000" />
+      <workItem from="1700299871111" duration="6825000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -107,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699198173123</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1699701598741</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699701598741</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
